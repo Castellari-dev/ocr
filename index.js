@@ -2,6 +2,7 @@ const fs = require('fs').promises;
 const path = require('path');
 const axios = require('axios');
 const pdfParse = require('pdf-parse');
+require('dotenv').config();
 
 
 async function main() {
@@ -45,7 +46,7 @@ function splitIntoChunks(text, wordsPerChunk) {
 
 async function sendTextToWebhook(text) {
   try {
-    const url = "http://10.50.2.130:42069/webhook/webhook-test";
+    const url = process.env.WEBHOOK;
     const payload = { texto: text };
     
     const response = await axios.post(url, payload);
